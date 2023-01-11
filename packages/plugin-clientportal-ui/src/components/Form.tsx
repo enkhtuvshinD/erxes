@@ -46,7 +46,7 @@ class Form extends React.Component<Props, State> {
     }
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { formValues } = this.state;
 
@@ -139,7 +139,7 @@ class Form extends React.Component<Props, State> {
   renderSubmit = () => {
     return (
       <ButtonWrap>
-        <Button btnStyle="success" icon="check-circle" type="submit">
+        <Button btnStyle='success' icon='check-circle' type='submit'>
           Submit
         </Button>
       </ButtonWrap>

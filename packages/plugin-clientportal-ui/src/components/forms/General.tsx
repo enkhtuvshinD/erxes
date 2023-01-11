@@ -96,7 +96,7 @@ function General({
       return [];
     }
 
-    return options.map(option => ({
+    return options.map((option) => ({
       value: option[valueKey],
       label: option[labelKey]
     }));
@@ -113,10 +113,10 @@ function General({
     boardId?: string;
     pipelineId?: string;
   }) {
-    const onChangeStage = stgId => handleFormChange(`${type}StageId`, stgId);
-    const onChangePipeline = plId =>
+    const onChangeStage = (stgId) => handleFormChange(`${type}StageId`, stgId);
+    const onChangePipeline = (plId) =>
       handleFormChange(`${type}PipelineId`, plId);
-    const onChangeBoard = brId => handleFormChange(`${type}BoardId`, brId);
+    const onChangeBoard = (brId) => handleFormChange(`${type}BoardId`, brId);
 
     return isEnabled('cards') ? (
       <BoardSelect
@@ -168,8 +168,8 @@ function General({
             />
             {boardType && (
               <OverlayTrigger
-                trigger="click"
-                placement="bottom-end"
+                trigger='click'
+                placement='bottom-end'
                 overlay={renderBoardSelect({
                   type: boardType,
                   stageId,
@@ -179,7 +179,7 @@ function General({
                 rootClose={true}
               >
                 <IconWrap>
-                  <Icon icon="cog" size={24} />
+                  <Icon icon='cog' size={24} />
                 </IconWrap>
               </OverlayTrigger>
             )}
@@ -329,7 +329,7 @@ function General({
                 </ControlLabel>
                 <p>{__('Knowledge base topic in Client Portal')}</p>
                 <Select
-                  placeholder="Select a knowledge base topic"
+                  placeholder='Select a knowledge base topic'
                   value={knowledgeBaseTopicId}
                   options={generateOptions(topics, '_id', 'title')}
                   onChange={handleSelectChange}
