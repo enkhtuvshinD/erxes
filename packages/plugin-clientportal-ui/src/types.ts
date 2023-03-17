@@ -169,3 +169,10 @@ export type ClientPortalGetLastQueryResponse = {
   clientPortalGetLast: ClientPortalConfig;
   loading?: boolean;
 };
+
+export type ClientPortalNotification = {
+  title?: string;
+  content?: string;
+  receivers?: string[];
+  link?: string;
+};

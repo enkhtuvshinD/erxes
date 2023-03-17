@@ -52,6 +52,41 @@ const notificationMutations = {
     await models.ClientPortalUsers.updateNotificationSettings(cpUser._id, doc);
 
     return models.ClientPortalUsers.findOne({ _id: cpUser._id });
+  },
+
+  async clientPortalNotificationsCreate(
+    _root,
+    {
+      title,
+      content,
+      link,
+      receivers
+    }: { title: string; content: string; link: string; receivers: string[] },
+    { models, cpUser }: IContext
+  ) {
+    if (!cpUser) {
+      throw new Error('You are not logged in');
+    }
+
+    if (!receivers) {
+      throw new Error('User not found');
+    }
+
+    for (const _id of receivers) {
+      await models.ClientPortalNotifications.createNotification(
+        {
+          title,
+          content,
+          link,
+          receiver: _id,
+          notifType: 'system',
+          clientPortalId: cpUser._id
+        },
+        cpUser._id
+      );
+    }
+
+    return 'success';
   }
 };
 

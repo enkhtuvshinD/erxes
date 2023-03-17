@@ -62,6 +62,7 @@ export const queries = `
 export const mutations = `
   clientPortalNotificationsMarkAsRead (_ids: [String]) : String
   clientPortalNotificationsRemove(_ids: [String]) : JSON
+  clientPortalNotificationsCreate(title: String, content: String, link: String, receivers: [String]): String
 
   clientPortalUserUpdateNotificationSettings(
     receiveByEmail: Boolean,

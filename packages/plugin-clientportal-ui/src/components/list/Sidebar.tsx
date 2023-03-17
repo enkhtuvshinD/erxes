@@ -5,6 +5,7 @@ import React from 'react';
 import TypeFilter from '../../containers/TypeFilter';
 import Wrapper from '@erxes/ui/src/layout/components/Wrapper';
 import { isEnabled } from '@erxes/ui/src/utils/core';
+import SegmentFilter from '../../containers/SegmentFilter';
 
 type Props = {
   loadingMainQuery: boolean;
@@ -27,6 +28,13 @@ function Sidebar({ counts, loadingMainQuery }: Props) {
         <DateFilters
           type="clientportal:user"
           loadingMainQuery={loadingMainQuery}
+        />
+      )}
+      {isEnabled('segments') && (
+        <SegmentFilter
+          type={'user'}
+          loadingMainQuery={loadingMainQuery}
+          // abortController={this.abortController}
         />
       )}
     </Wrapper.Sidebar>

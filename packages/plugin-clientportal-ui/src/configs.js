@@ -21,6 +21,15 @@ module.exports = {
       scope: 'clientportal',
       action: '',
       permissions: []
+    },
+    {
+      text: 'Client Portal Notification',
+      to: '/settings/client-portal-notification',
+      image: '/images/icons/erxes-32.png',
+      location: 'settings',
+      scope: 'clientportal',
+      action: '',
+      permissions: []
     }
   ]
 };

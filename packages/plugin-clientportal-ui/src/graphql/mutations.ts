@@ -182,6 +182,11 @@ mutation ClientPortalUsersChangeVerificationStatus($status: ClientPortalUserVeri
 }
 `;
 
+const clientPortalNotificationsCreate = `
+mutation clientPortalNotificationsCreate($title: String, $content: String, $link: String, $receivers: [String]) {
+  clientPortalNotificationsCreate(title:$title, content:$content, link: $link, receivers:$receivers)
+}
+`;
 export default {
   createOrUpdateConfig,
   remove,
@@ -191,5 +196,6 @@ export default {
   verifyUsers,
   clientPortalCommentsAdd,
   clientPortalCommentsRemove,
-  changeVerificationStatus
+  changeVerificationStatus,
+  clientPortalNotificationsCreate
 };

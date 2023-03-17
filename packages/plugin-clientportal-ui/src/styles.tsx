@@ -136,3 +136,11 @@ export const List = styled(SidebarList)`
     }
   }
 `;
+
+export const RadioContainer = styled.div`
+  border-bottom: 1px dotted ${colors.borderPrimary};
+
+  > * {
+    padding: ${dimensions.coreSpacing}px;
+  }
+`;

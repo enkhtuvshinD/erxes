@@ -15,6 +15,12 @@ const ClientPortal = asyncComponent(() =>
   )
 );
 
+const ClientPortalNotification = asyncComponent(() =>
+  import(
+    /* webpackChunkName: "ClientPortalDetail - Settings" */ './components/ClientPortalNotification'
+  )
+);
+
 const ClientPortalUserDetails = asyncComponent(() =>
   import(
     /* webpackChunkName: "ClientPortalDetails" */ './containers/details/ClientPortalUserDetails'
@@ -37,6 +43,12 @@ const clientPortal = ({ location, history }) => {
   const queryParams = queryString.parse(location.search);
 
   return <ClientPortal queryParams={queryParams} history={history} />;
+};
+const clientPortalNotification = ({ location, history }) => {
+  const queryParams = queryString.parse(location.search);
+  return (
+    <ClientPortalNotification queryParams={queryParams} history={history} />
+  );
 };
 
 const configsForm = ({ location, history }) => {
@@ -92,6 +104,12 @@ const routes = () => (
       key="/settings/client-portal/user"
       path="/settings/client-portal/user"
       component={list}
+    />
+    <Route
+      key="/settings/client-portal-notification"
+      path="/settings/client-portal-notification"
+      exact={true}
+      component={clientPortalNotification}
     />
   </>
 );
