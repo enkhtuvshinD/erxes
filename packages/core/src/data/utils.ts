@@ -484,7 +484,7 @@ export const deleteFileAWS = async (fileName: string, models?: IModels) => {
   const s3 = await createAWS(models);
 
   return new Promise((resolve, reject) => {
-    s3.deleteObject(params, err => {
+    s3.deleteObject(params, (err) => {
       if (err) {
         return reject(err);
       }
@@ -513,7 +513,7 @@ export const uploadFileLocal = async (file: {
   const rawData = fs.readFileSync(oldPath);
 
   return new Promise((resolve, reject) => {
-    fs.writeFile(newPath, rawData, err => {
+    fs.writeFile(newPath, rawData, (err) => {
       if (err) {
         return reject(err);
       }
@@ -574,7 +574,7 @@ export const uploadFileGCS = async (
 
 const deleteFileLocal = async (fileName: string) => {
   return new Promise((resolve, reject) => {
-    fs.unlink(`${uploadsFolderPath}/${fileName}`, error => {
+    fs.unlink(`${uploadsFolderPath}/${fileName}`, (error) => {
       if (error) {
         return reject(error);
       }
@@ -597,7 +597,7 @@ const deleteFileGCS = async (fileName: string, models?: IModels) => {
     bucket
       .file(fileName)
       .delete()
-      .then(err => {
+      .then((err) => {
         if (err) {
           return reject(err);
         }
@@ -781,9 +781,9 @@ export const registerOnboardHistory = ({
         });
       }
     })
-    .catch(e => debugBase(e));
+    .catch((e) => debugBase(e));
 
-export const getConfigs = async models => {
+export const getConfigs = async (models) => {
   const configsMap = {};
   const configs = await models.Configs.find({}).lean();
 
@@ -842,7 +842,7 @@ export const isUsingElk = () => {
   return ELK_SYNCER === 'false' ? false : true;
 };
 
-export const checkPremiumService = async type => {
+export const checkPremiumService = async (type) => {
   try {
     const domain = getEnv({ name: 'DOMAIN' })
       .replace('https://', '')
@@ -878,7 +878,7 @@ export const numberCalculator = (size: number, num?: any, skip?: boolean) => {
   return num;
 };
 
-export const configReplacer = config => {
+export const configReplacer = (config) => {
   const now = new Date();
 
   // replace type of date
@@ -943,7 +943,7 @@ export const sendMobileNotification = async (
       } catch (e) {
         debugError(`Error occurred during firebase send: ${e.message}`);
 
-        await models.Users.updateOne(
+        await models.Users.updateMany(
           { deviceTokens: token },
           { $pull: { deviceTokens: token } }
         );
