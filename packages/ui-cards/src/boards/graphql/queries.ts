@@ -143,7 +143,16 @@ const commonParams = `
   $assignedToMe: String,
   $branchIds: [String]
   $departmentIds: [String]
+  $segment: String
   $segmentData:String
+  $createdStartDate: Date
+  $createdEndDate: Date
+  $stateChangedStartDate: Date
+  $stateChangedEndDate: Date
+  $startDateStartDate: Date
+  $startDateEndDate: Date
+  $closeDateStartDate: Date
+  $closeDateEndDate: Date
 `;
 
 const commonParamDefs = `
@@ -157,7 +166,16 @@ const commonParamDefs = `
   assignedToMe: $assignedToMe,
   branchIds:$branchIds
   departmentIds:$departmentIds
+  segment: $segment
   segmentData:$segmentData
+  createdStartDate: $createdStartDate
+  createdEndDate: $createdEndDate
+  stateChangedStartDate: $stateChangedStartDate
+  stateChangedEndDate: $stateChangedEndDate
+  startDateStartDate: $startDateStartDate
+  startDateEndDate: $startDateEndDate
+  closeDateStartDate: $closeDateStartDate
+  closeDateEndDate: $closeDateEndDate
 `;
 
 const stageParams = `
@@ -176,6 +194,7 @@ const stageCommon = `
   _id
   name
   order
+  unUsedAmount
   amount
   itemsTotalCount
   pipelineId

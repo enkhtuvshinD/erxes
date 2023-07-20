@@ -83,7 +83,7 @@ function Header({
   };
 
   const renderAuth = () => {
-    if (!config.ticketToggle) {
+    if (!config.ticketToggle || !config.taskToggle || !config.dealToggle) {
       return null;
     }
 
@@ -137,19 +137,12 @@ function Header({
           <Dropdown.Menu>
             <Dropdown.Item
               className="d-flex align-items-center justify-content-between"
-              eventKey="0"
-            >
-              {renderUserFullName(currentUser)}
-            </Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item
-              className="d-flex align-items-center justify-content-between"
               eventKey="1"
               href="/profile"
             >
               <div>
                 <Icon icon="user" />
-                My profle
+                {renderUserFullName(currentUser)}
               </div>
             </Dropdown.Item>
             <Dropdown.Item
@@ -163,7 +156,12 @@ function Header({
               </div>
             </Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item eventKey="3" onClick={() => logout()}>
+            <Dropdown.Item eventKey="3" onClick={() => {
+              if (typeof window !== 'undefined') {
+                sessionStorage.clear()
+              }
+              logout()
+            }}>
               <Icon icon="logout-1" />
               Logout
             </Dropdown.Item>
@@ -182,7 +180,13 @@ function Header({
         <HeaderTop>
           <HeaderLogo>
             <Link href="/">
-              <img src={readFile(config.logo)} />
+              <img
+                src={
+                  config.logo
+                    ? readFile(config.logo)
+                    : "/static/logos/erxes-logo-white.svg"
+                }
+              />
             </Link>
             <HeaderTitle color={getConfigColor(config, "headingColor")}>
               {config.name}
@@ -202,7 +206,10 @@ function Header({
               ? renderMenu("/deals", config.dealLabel || "Sales pipeline")
               : null}
             {config.purchaseToggle && currentUser
-              ? renderMenu("/purchases", config.purchaseLabel || "Purchase pipeline")
+              ? renderMenu(
+                  "/purchases",
+                  config.purchaseLabel || "Purchase pipeline"
+                )
               : null}
             {config.taskToggle && currentUser
               ? renderMenu("/tasks", config.taskLabel || "Task")
@@ -213,7 +220,9 @@ function Header({
               color={getConfigColor(config, "headingColor")}
               baseColor={getConfigColor(config, "baseColor")}
             >
-              {currentUser ? renderCurrentUser() : renderAuth()}
+              {currentUser && Object.keys(currentUser).length !== 0
+                ? renderCurrentUser()
+                : renderAuth()}
             </SupportMenus>
           </HeaderRight>
         </HeaderTop>
